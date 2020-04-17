@@ -20,7 +20,8 @@ export const appRoutes = compose([
       // Override error status codes to avoid error messages on Slack interface.
       // The more errors users will see, the more they think the app is bogus.
       // For as much as we know, this is a random picker, and in whatever aspect
-      // of the app goes wrong no matter how simple, they'd think the shit is broken.
+      // of the app goes wrong no matter how simple, they'll think the shit is broken.
+      // Or just pretending to be a real function.
       // So --- no error codes, please.
       ctx.status = 200;
       logger.error(error);
