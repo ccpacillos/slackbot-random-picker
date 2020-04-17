@@ -69,3 +69,6 @@ notes.md
 
 # dumps
 dump/*
+
+# sqlite files
+db.sqlite
