@@ -48,7 +48,9 @@ export async function commandHandler(ctx: any) {
 
     const sorted = R.sort(([, stonesA], [, stonesB]) => stonesB - stonesA, zip);
     const tallies = R.map(([a, b]) => `<@${a}> = ${b}`, sorted);
-    rounds.push(`Round ${rounds.length + 1} Scores:\n${tallies.join('\n')}`);
+    rounds.push(
+      `Round ${rounds.length + 1} Random Scores:\n${tallies.join('\n')}`,
+    );
     const [, threshold] = sorted[count - 1];
     const thoseWhoMadeIt = R.filter(
       ([, stones]) => stones >= threshold,
