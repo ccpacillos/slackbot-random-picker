@@ -22,7 +22,7 @@ export async function commandHandler(ctx: any) {
 
   const count = Number(body.text);
 
-  if (typeof count !== 'number') {
+  if (count === NaN) {
     ctx.body = 'Please provide a number!';
     return;
   }
