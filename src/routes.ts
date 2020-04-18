@@ -11,6 +11,14 @@ const router = new Router();
 
 router.post('/pick', authorize, commandHandler);
 router.get('/install', install);
+router.get('/install-it', async (ctx) => {
+  const origin = 'https://slack.com/oauth/v2/authorize';
+  const clientId = process.env.SLACK_CLIENT_ID;
+  const scope = process.env.SLACK_AUTH_SCOPES;
+
+  const url = `${origin}?client_id=${clientId}&scope=${scope}`;
+  ctx.redirect(url);
+});
 
 export const appRoutes = compose([
   async (ctx: any, next: any) => {

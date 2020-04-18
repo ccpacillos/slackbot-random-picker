@@ -3,6 +3,7 @@ import { db } from './lib/pg';
 
 export async function install(ctx: any) {
   const { code } = ctx.query;
+
   const res = await slackOAuthAccess(code);
 
   if (res.error) {
@@ -34,5 +35,6 @@ export async function install(ctx: any) {
     );
   }
 
+  ctx.status = 302;
   ctx.redirect('https://www.slack.com/apps/A0120C1QH8V');
 }
