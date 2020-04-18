@@ -1,0 +1,16 @@
+version: '3.2'
+services:
+  mysql:
+    container_name: pg_random_picker
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: password
+    ports:
+      - '5432:5432'
+    networks:
+      - local
+
+networks:
+  local:
+    driver: bridge

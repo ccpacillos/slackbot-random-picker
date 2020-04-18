@@ -4,7 +4,6 @@ import cors from '@koa/cors';
 import Application from 'koa';
 import compose from 'koa-compose';
 import { Logger } from 'highoutput-utilities';
-import { db } from './lib/sqlite';
 
 const logger = new Logger(['app']);
 
@@ -37,7 +36,6 @@ export default class App {
 
   async stop(signal?: string): Promise<void> {
     logger.info(`Stop: ${signal}`);
-    db.close();
     process.exit();
   }
 

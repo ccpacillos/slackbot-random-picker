@@ -2,20 +2,22 @@ import crypto from 'crypto';
 import * as d3 from 'd3-random';
 import seed from 'seedrandom';
 import R from 'ramda';
-import { dbGet } from './lib/sqlite';
 import { slackConversationMembers, slackChatPostMessage } from './lib/request';
+import { db } from './lib/pg';
 
 export async function commandHandler(ctx: any) {
   const { body } = ctx.request;
   ctx.status = 200;
 
-  const team: any = await dbGet('SELECT * FROM Team WHERE externalId = ?', [
+  const {
+    rows: [team],
+  }: any = await db.query('SELECT * FROM Team WHERE externalId = $1', [
     body.team_id,
   ]);
 
   if (!team) return;
 
-  if (body.command !== '/pick') return;
+  if (body.command !== '/pick' && body.command !== '/pick-test') return;
   if (!body.text) return;
 
   const count = Number(body.text);
@@ -44,7 +46,7 @@ export async function commandHandler(ctx: any) {
   const runLeg = (participants: string[], rounds: string[]): string[] => {
     if (participants.length === count) {
       rounds.push(
-        `Winners: ${R.map((id) => `<@${id}>`, participants).join(', ')}`,
+        `Pick/s: ${R.map((id) => `<@${id}>`, participants).join(', ')}`,
       );
 
       return rounds;
