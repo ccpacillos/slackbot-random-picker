@@ -34,6 +34,5 @@ export async function install(ctx: any) {
     );
   }
 
-  ctx.status = 200;
-  ctx.body = { ok: true };
+  ctx.redirect('https://www.slack.com/apps/A0120C1QH8V');
 }
