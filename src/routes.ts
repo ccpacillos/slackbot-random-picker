@@ -19,6 +19,16 @@ router.get('/install-it', async (ctx) => {
   const url = `${origin}?client_id=${clientId}&scope=${scope}`;
   ctx.redirect(url);
 });
+router.get('/policy', async (ctx) => {
+  ctx.redirect(
+    'https://www.privacypolicygenerator.info/live.php?token=OKkTcN4wED3HwyETi5f0WjJDQeoiF0OZ',
+  );
+});
+router.get('/tos', async (ctx) => {
+  ctx.redirect(
+    'https://www.termsandconditionsgenerator.com/live.php?token=HppiRO96xNoisWiEEfxtsF3M98C3bTdO',
+  );
+});
 
 export const appRoutes = compose([
   async (ctx: any, next: any) => {
