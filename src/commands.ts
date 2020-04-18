@@ -18,28 +18,31 @@ export async function commandHandler(ctx: any) {
   if (body.command !== '/pick') return;
   if (!body.text) return;
 
-  const inputNumber = Number(body.text);
+  const count = Number(body.text);
 
-  if (typeof inputNumber !== 'number') {
+  if (typeof count !== 'number') {
     ctx.body = 'Please provide a number!';
     return;
   }
 
-  if (inputNumber < 1) {
+  if (count < 1) {
     ctx.body = 'Please, dude.';
     return;
   }
 
   const users = await slackConversationMembers(team.token, body.channel_id);
 
+  if (count > users.length) {
+    ctx.body = 'Man, your input exceeds the number of users in the channel.';
+    return;
+  }
+
   const random = d3.randomNormal.source(
     seed(crypto.randomBytes(10).toString('hex'), { entropy: true }),
   )(0, 1);
 
-  const count = inputNumber > users.length ? users.length : inputNumber;
-
   const runLeg = (participants: string[], rounds: string[]): string[] => {
-    if (participants.length === inputNumber) {
+    if (participants.length === count) {
       rounds.push(
         `Winners: ${R.map((id) => `<@${id}>`, participants).join(', ')}`,
       );
