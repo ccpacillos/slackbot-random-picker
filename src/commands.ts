@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import * as d3 from 'd3-random';
 import seed from 'seedrandom';
-import R, { trim } from 'ramda';
+import R from 'ramda';
 import { dbGet } from './lib/sqlite';
 import { slackConversationMembers, slackChatPostMessage } from './lib/request';
 
@@ -23,12 +23,6 @@ export async function commandHandler(ctx: any) {
   if (!count) ctx.body = 'Please provide a number!';
 
   const users = await slackConversationMembers(team.token, body.channel_id);
-  if (count === users.length) {
-    ctx.body = trim(`
-      Come on man! I cannot randomly pick 3 eggs out of same effin 3 eggs can I?
-    `);
-    return;
-  }
 
   const random = d3.randomNormal.source(
     seed(crypto.randomBytes(10).toString('hex'), { entropy: true }),
