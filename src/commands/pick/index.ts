@@ -33,7 +33,7 @@ export async function commandHandler(ctx: any) {
   slackChatPostMessage(team.token, {
     channel: body.channel_id,
     as_user: true,
-    text: trim('<!here> Random pick! Whose turn is it?'),
+    text: trim('Picking random users in <!here>!'),
   }).then(async (res) => {
     const users = await slackConversationMembers(team.token, body.channel_id);
     const participants = await syncAndGetParticipants(users, body.channel_id);
@@ -43,7 +43,7 @@ export async function commandHandler(ctx: any) {
     if (count >= participants.length) {
       replies.push(
         trim(`
-          Pick count matches pool count.
+          No need to randomize current pool.
           Automatically picking ${participants
             .map((id) => `<@${id}>`)
             .join(', ')}.
