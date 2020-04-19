@@ -2,7 +2,7 @@ import compose from 'koa-compose';
 import Router from 'koa-router';
 import { Logger } from 'highoutput-utilities';
 import { authorize } from './lib/authorize';
-import { commandHandler } from './commands';
+import { commandHandler } from './commands/pick';
 import { install } from './install';
 
 const logger = new Logger(['routes']);
