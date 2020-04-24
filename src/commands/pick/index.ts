@@ -71,8 +71,8 @@ export async function commandHandler(ctx: any) {
           ${R.init(summaries).join('\n')}
         `),
         `\n${trim(`
-          Wondering about how the picking process is done?
-          Click on my profile and select *About this app* for more details.
+          _Wondering about how the picking process is done?
+          Click on my profile and select *About this app* for more details._
         `)}`,
       );
 
