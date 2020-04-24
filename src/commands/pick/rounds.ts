@@ -10,7 +10,9 @@ export default function getRounds(
   picks: string[];
 } {
   if (ids.length === count) {
-    rounds.push(`*Random Pick/s*: ${ids.map((id) => `<@${id}>`).join(', ')}\n`);
+    rounds.push(
+      `Congrats ${ids.map((id) => `<@${id}>`).join(', ')} it's your turn!\n`,
+    );
 
     return {
       summaries: rounds,
