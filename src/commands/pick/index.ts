@@ -33,7 +33,7 @@ export async function commandHandler(ctx: any) {
   slackChatPostMessage(team.token, {
     channel: body.channel_id,
     as_user: true,
-    text: trim(`Picking ${count} random users in <!here>!`),
+    text: trim(`Picking ${count} random user/s in <!here>!`),
   }).then(async (res) => {
     const users = await slackConversationMembers(team.token, body.channel_id);
     const participants = await syncAndGetParticipants(users, body.channel_id);
@@ -64,12 +64,16 @@ export async function commandHandler(ctx: any) {
 
       replies.push(
         R.last(summaries) as string,
-        'Summary:\n',
+        '*Summary:*\n',
         `Number of user/s in pool: ${participants.length}\n`,
         trim(`
-          Random scores per round:
+          Random scores by round:
           ${R.init(summaries).join('\n')}
         `),
+        `\n${trim(`
+          Wondering about how the picking process is done?
+          Click on my profile and select *About this app* for more details.
+        `)}`,
       );
 
       picks = picksFromRounds;
