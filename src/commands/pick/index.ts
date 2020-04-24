@@ -33,7 +33,7 @@ export async function commandHandler(ctx: any) {
   slackChatPostMessage(team.token, {
     channel: body.channel_id,
     as_user: true,
-    text: trim(`Picking ${count} random user/s in <!here>!`),
+    text: trim(`:mega: Picking ${count} random user/s in <!here>!`),
   }).then(async (res) => {
     const users = await slackConversationMembers(team.token, body.channel_id);
     const participants = await syncAndGetParticipants(users, body.channel_id);

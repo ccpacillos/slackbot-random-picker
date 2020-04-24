@@ -11,7 +11,9 @@ export default function getRounds(
 } {
   if (ids.length === count) {
     rounds.push(
-      `Congrats ${ids.map((id) => `<@${id}>`).join(', ')} it's your turn!\n`,
+      `:tada: Congrats ${ids
+        .map((id) => `<@${id}>`)
+        .join(', ')}! It's your turn!\n`,
     );
 
     return {
